@@ -1,0 +1,122 @@
+:: StoryTitle
+Creative Project Simulator
+
+:: StoryData
+{
+	"ifid": "C561216C-E544-48D4-BAE1-EA24910D6098",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "Start - AgreeToHonesty",
+	"tag-colors": {
+		"rough": "red",
+		"idea": "purple"
+	},
+	"zoom": 0.6
+}
+
+
+:: StoryBanner {"position":"200,100","size":"100,100"}
+<<set $health = 5>>
+<<set $money = 10>>
+
+HEALTH: $health
+MONEY: $money
+
+
+:: 2 {"position":"900,300","size":"100,100"}
+That's lovely. 
+
+It's a saturated market these days, isn't it? 
+
+[[Yes]]
+[[No]]
+
+:: Aside:Making Interactive Novel {"position":"700,450","size":"100,100"}
+
+Well you can't do that one, that's my thing. And <i>this</i> is my creative project so I'm not letting you simulate that. 
+
+
+
+
+:: GiveUp {"position":"400,800","size":"100,100"}
+You consider abandoning your creative project, and with it, your dreams. Your soul gradually withers, joining the millions of others who didn’t quite reach their potential. 
+
+Also, your lack of commitment to a creative project makes you less attractive to other creatives. The relationship you end up in is barren of life and spontaneity. 
+
+Every day of the rest of your life feels identical, an inescapable Groundhog Day. Your life is fine, it's not <i>bad</i>. But, you live the rest of your life with a feeling that there's a lock deep inside you, that you never quite found the key for. 
+
+<<return "Wait - no! I won't give up!">>
+Give up. 
+
+
+:: PassageHeader {"position":"325,100","size":"100,100"}
+============================================
+<<set $healthBar = "[]".repeat(5)>>
+<small>This is a random header to remind myself that I can do that. 
+HEALTH: $healthBar
+
+</small>
+============================================
+
+
+
+
+:: Start - AgreeToHonesty [rough] {"position":"200,300","size":"100,100"}
+
+
+<<set $hasAgreedToHonesty = false>>
+<<set $health = 5>>
+<<set $money = 10>>
+
+A warning - you must be honest to participate in this game. You could just pick all the best options, but that will get you nowhere. 
+
+<<checkbox "$hasAgreedToHonesty" false true>>
+<<button "I agree" "Start-PickProjectType">><</button>>
+
+:: Start-PickProjectType {"position":"400,300","size":"100,100"}
+You'd like to do something creative. That's nice. It's nice to have dreams. Perhaps one day you will be. What type of project is it? 
+
+[[An album ->2][$projectType to 'album']]
+[[A poem ->2][$projectType to 'poem']]
+[[A book ->2][$projectType to 'book']]
+[[A fourth wall-breaking interactive text-based adventure experience ->Aside:Making Interactive Novel]]
+
+[[I'm bored of this (Quit Game)->GiveUp]] 
+
+:: Start-InputUserDetails [idea] {"position":"200,450","size":"100,100"}
+<<type 50ms>>
+...Asking the player for some kind of details! 
+<</type>>
+
+<<linkreplace "You'll //never// take me alive!" t8n>>On second thought, don't hurt me.<</linkreplace>>
+
+
+
+:: StoryScript [script]
+/*
+	Debug Settings.
+*/
+(function () {
+	Setting.addHeader("Debug Settings");
+
+	function initSettingDebug() {
+		Config.debug = settings.debug;
+	}
+	Setting.addToggle("debug", {
+		label    : "Enable test/debug mode?",
+		default  : false,
+		onInit   : initSettingDebug,
+		onChange : function () {
+			initSettingDebug();
+			window.location.reload();
+		}
+	});
+})();
+
+
+
+:: StoryStylesheet [stylesheet]
+
+.say-box {
+	background-color: white;
+}
