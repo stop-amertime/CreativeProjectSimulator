@@ -1,0 +1,1525 @@
+:: StoryTitle
+Creative Project Simulator
+
+
+:: StoryData
+{
+  "ifid": "C561216C-E544-48D4-BAE1-EA24910D6098",
+  "format": "SugarCube",
+  "format-version": "2.36.1",
+  "start": "Start - AgreeToHonesty",
+  "tag-colors": {
+    "rough": "red",
+    "idea": "purple"
+  },
+  "zoom": 0.6
+}
+
+
+:: Aside:Making Interactive Novel {"position":"1575,400","size":"100,100"}
+Well you can't do that one, that's my thing. And <i>this</i> is my creative project so I'm not letting you simulate that.
+
+
+:: GiveUp [rough] {"position":"1700,0","size":"100,100"}
+You consider abandoning your creative project, and with it, your dreams. Your soul gradually withers, joining the millions of others who didn’t quite reach their potential. 
+
+Also, your lack of commitment to a creative project makes you less attractive to other creatives. The relationship you end up in is barren of life and spontaneity. 
+
+Every day of the rest of your life feels identical, an inescapable Groundhog Day. Your life is fine, it's not <i>bad</i>. But, you live the rest of your life with a feeling that there's a lock deep inside you, that you never quite found the key for. 
+
+<<return "Wait - no! I won't give up!">>
+Give up.
+
+
+:: PassageHeader {"position":"375,125","size":"100,100"}
+<<set $showHeader = false>>
+<<if $showHeader == true>>
+============================================
+<<set $healthBar = "[]".repeat(5)>>
+<small>This is a random header to remind myself that I can do that. 
+HEALTH: $healthBar
+
+</small>
+============================================
+<</if>>
+
+
+:: Start - AgreeToHonesty [rough] {"position":"900,200","size":"200,200"}
+<<set $hasAgreedToHonesty = false>>
+<<set $health = 5>>
+<<set $money = 10>>
+
+A warning - you must be honest to participate in this game. You could just pick all the best options, but that will get you nowhere. 
+
+<<checkbox "$hasAgreedToHonesty" false true>>
+
+<<button [[I agree->Start-PickProjectType]]>><</button>>
+
+
+:: Start-InputUserDetails [idea] {"position":"1950,200","size":"100,100"}
+<<type 50ms>>
+...Asking the player for some kind of details! 
+<</type>>
+
+Perhaps their name, age, main inspirations... etc.
+
+
+:: Start-LongT&Cs {"position":"1250,300","size":"100,100"}
+(include an extremely long gibberish terms and conditions that the user needs to agree to. 
+
+batteries not included, all rights reserved. 
+
+data usage 
+
+etc.)
+
+Perhaps like, 3 or 4 in increasingly absurd lengths?
+
+
+:: Start-PickProjectType {"position":"1525,200","size":"200,100"}
+You'd like to do something creative. That's nice. It's nice to have dreams. Perhaps one day you will be. What type of project is it? 
+
+[[An album ->Start-InputUserDetails][$projectType to 'album']]
+[[A poem ->Start-InputUserDetails][$projectType to 'poem']]
+[[A book ->Start-InputUserDetails][$projectType to 'book']]
+[[A fourth wall-breaking interactive text-based adventure experience ->Aside:Making Interactive Novel]]
+
+[[I'm bored of this (Quit Game)->GiveUp]]
+
+
+:: Start-YourDetails [idea] {"position":"175,475","size":"100,100"}
+<<type 50ms>>
+...Asking the player for: 
+<</type>>
+
+<<linkreplace "You'll //never// take me alive!" t8n>>On second thought, don't hurt me.<</linkreplace>>
+
+→ Creating a simple dialog box widget
+<<widget "say" container>>
+	<div class="say-box">
+		<img class="say-image" @src="'images/' + _args[0].toLowerCase() + '.png'">
+		<p class="say-text">_contents</p>
+	</div>
+<</widget>>
+
+→ Using it
+
+:: StoryBanner {"position":"150,225","size":"200,100"}
+<<set $health = 5>>
+<<set $money = 10>>
+
+HEALTH: $health
+MONEY: $money
+
+<<set $urlPath = '
+
+
+:: StoryInterface {"position":"150,325","size":"200,100"}
+<div class="header">
+	<div id="header-text" data-passage="header-text"></div>
+	<div id="function-menu">
+		<span id="menu" class="lnr lnr-menu"></span>
+		<span id="settings" class="lnr lnr-cog"></span>
+		<span id="saves" class="lnr lnr-paperclip"></span>
+		<span id="restart" class="lnr lnr-redo"></span>
+	</div>
+</div>
+
+<div id="story">
+	<span id="back" class="lnr lnr-chevron-left"></span>
+	<div id="passages"></div>
+</div>
+
+<div class="footer">
+	<span id="up" class="lnr lnr-chevron-up"></span>
+	<span id="footer-menu" data-passage="footer-menu"></span>
+	<div class="mobile-menu">
+	 <span id="mob-menu" class="lnr lnr-menu"></span>
+		<div id="mob-function-menu">
+		 <span id="mob-settings" class="lnr lnr-cog"></span>
+		 <span id="mob-saves" class="lnr lnr-download"></span>
+		 <span id="mob-restart" class="lnr lnr-redo"></span>
+		</div>
+	 <span id="mob-footer-menu" data-passage="footer-menu"></span>
+	</div>
+</div>
+
+
+:: credits {"position":"375,600","size":"100,100"}
+[[Sugarcube 2 Documentation|https://www.motoslave.net/sugarcube/2/docs]]
+
+[[OpenDyslexic Font by Abbie Gonzalez|https://opendyslexic.org]]
+
+[[Notify Macro by Chapel|https://github.com/ChapelR/custom-macros-for-sugarcube-2]]
+
+[[Live Update Macro by Cycy|https://github.com/cyrusfirheir/cycy-wrote-custom-macros]]
+
+
+:: footer-menu {"position":"175,475","size":"100,100"}
+
+  <li>[[stats]]</li>
+  <!-- <li>[[styles]]</li> --> 
+  <li>
+  <<link "credits">>  
+    <<script>>
+      Dialog.setup("Credits");
+      Dialog.wiki(Story.get("credits").processText());
+      Dialog.open();
+    <</script>>
+  <</link>>
+  </li>
+
+:: header-text {"position":"150,125","size":"200,100"}
+<span class="title">CP sim </span>
+<span class="author">by <a href="https://ahmedamer.co.uk" target="_blank">ahmed amer</a></span>
+
+
+:: https://github.com/ChapelR/custom-macros-for-sugarcube-2 {"position":"375,725","size":"100,100"}
+
+
+
+:: https://opendyslexic.org {"position":"250,725","size":"100,100"}
+
+
+
+:: https://www.motoslave.net/sugarcube/2/docs {"position":"125,725","size":"100,100"}
+
+
+
+:: stats {"position":"250,600","size":"100,100"}
+<<set $statone to 50>><<set $stattwo to 50>>\
+!Stats
+
+<div class="stat-bar-group">
+<div class="stat-bar-container">
+<div class="stat-bar-overlay-left">Stat One $statone%</div>
+<div class="stat-bar-overlay-right">Stat Two $stattwo%</div>
+<div class="stat-bar" id="statone-stat"></div>
+</div></div>\
+
+Make sure to tag the stats page (& any similar pages) with 'noreturn' and include a return link like the one below to avoid an infinite loop!
+
+<<button "Return" $return>><</button>> /* or <<link "Return" $return>><</link>> */
+
+
+:: styles {"position":"125,600","size":"100,100"}
+Another page to do whatever you want with! I really just wanted another page to fill out the footer menu<3
+----
+!Heading 1
+!!Heading 2
+!!!Heading 3
+
+<<cycle "$cycling" autoselect>>
+	<<option "Cycling link 1">>
+	<<option "Cycling link 2">>
+	<<option "Cycling link 3">>
+<</cycle>>
+
+<<textbox "$textbox" "Type here...">><<button "Submit">><</button>>
+
+* List item 1
+* List item 2
+* List item 3
+
+<<button "Return" $return>><</button>>
+
+
+:: StoryScript [script]
+/*
+	Debug Settings.
+*/
+(function () {
+	Setting.addHeader("Debug Settings");
+
+	function initSettingDebug() {
+		Config.debug = settings.debug;
+	}
+	Setting.addToggle("debug", {
+		label    : "Enable test/debug mode?",
+		default  : false,
+		onInit   : initSettingDebug,
+		onChange : function () {
+			initSettingDebug();
+			window.location.reload();
+		}
+	});
+})();
+
+/* =============== FROM TEMPLATE ================= */
+
+// import linearicons
+importStyles(
+	"https://cdn.linearicons.com/free/1.0.0/icon-font.min.css");
+// end linearicons
+
+// reset passage to top
+$(document).on(":passagedisplay", function() {
+	$("#passages").scrollTop(0);
+});
+// end reset passage
+
+// function menu
+$(document).ready(function() {
+	$("#saves").click(function() {
+		UI.saves();
+	});	
+	$("#settings").click(function() {
+		UI.settings();
+	});
+	$("#restart").click(function() {
+		UI.restart();
+	});	
+	$("#back").click(function() {
+		Engine.backward();
+	});
+	$("#mob-saves").click(function() {
+		UI.saves();
+	});
+	$("#mob-settings").click(function() {
+		UI.settings();
+	});
+	$("#mob-restart").click(function() {
+		UI.restart();
+	});	
+});
+// function menu
+
+// force fullscreen portrait mode on mobile
+function lock (orientation) {
+	if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  } else if (document.documentElement.mozRequestFullScreen) {
+    document.documentElement.mozRequestFullScreen();
+  } else if (document.documentElement.webkitRequestFullscreen) {
+    document.documentElement.webkitRequestFullscreen();
+  } else if (document.documentElement.msRequestFullscreen) {
+    document.documentElement.msRequestFullscreen();
+  }
+	screen.orientation.lock(orientation);
+};
+// end force fullscreen
+
+// tag passage 'noreturn' to avoid return loop errors
+$(document).on(':passagestart', function (ev) {
+    if (!ev.passage.tags.includes('noreturn')) {
+        State.variables.return = ev.passage.title;
+    }
+});
+// end noreturn
+
+// autosaves - tag passage 'autosave' to trigger saving
+config.saves.autosave = true;
+config.saves.isAllowed = function () {
+	if (tags().includes('noreturn')) {
+		return false;
+	}
+	return true;
+};
+// end autosaves
+
+// name saves - allows players to change name of save file
+Config.saves.onSave = function (save, details) {
+	if (settings.autoname) {
+		save.title = State.getVar("$chapter");
+	} else if (details.type == "autosave") {
+		save.title = "Autosave";
+	} else {
+		save.title = prompt("Enter Save Name:", save.title);
+	}
+}
+// end name saves
+
+// STAT BARS (just an example!)//
+// stat one
+$(document).on(":passagedisplay", function() {
+	$("#story").scrollTop(0);
+	var statbarStat = State.getVar("$statone") + "%";
+	$("#statone-stat").attr("style", "width: " + statbarStat);
+});
+// end stat one
+
+//SETTINGS//
+// change font size
+var settingFontSize = ["100%", "130%", "150%"];
+var resizeFont = function() {
+	var size = document.getElementById("passages");
+	switch (settings.fontSize) {
+		case "100%":
+			size.style.fontSize = "100%";
+			break;
+	}
+	switch (settings.fontSize) {
+		case "130%":
+			size.style.fontSize = "130%";
+			break;
+	}
+	switch (settings.fontSize) {
+		case "150%":
+			size.style.fontSize = "150%";
+			break;
+	}
+};
+Setting.addList("fontSize", {
+	label		: "Change font size",
+	list		: settingFontSize,
+	onInit		: resizeFont,
+	onChange	: resizeFont
+});
+// end change font size
+
+// change font family
+var settingFontFamily = ["Serif","Sans-serif","OpenDyslexic"];
+var fontFamily = function() {
+	var $html = $("html");
+		$html.removeClass("serif sansserif opendyslexic");
+	switch (settings.fontFamily) {
+		case "Sans-serif":
+			$html.addClass("sansserif");
+			break;
+		case "Serif":
+			$html.addClass("serif");
+			break;
+			case "OpenDyslexic":
+			$html.addClass("opendyslexic");
+			break;
+	}
+};
+Setting.addList("fontFamily", {
+	label		: "Change font style",
+	list		: settingFontFamily,
+	default: "Sans-serif",
+	onInit		: fontFamily,
+	onChange	: fontFamily
+});
+// end change font family
+
+// change theme
+var settingThemeNames = ["Dark", "Light"];
+var settingThemeHandler = function () {
+	var $html = $("html");
+	$html.removeClass("dm");
+	switch (settings.theme) {
+	case "Dark":
+		$html.addClass("dm");
+		break;
+	}
+};
+Setting.addList("theme", {
+	label    : "Switch display mode",
+	list     : settingThemeNames,
+	default	 : "Light",
+	onInit   : settingThemeHandler,
+	onChange : settingThemeHandler
+});
+// end change theme
+
+// name saves toggle
+Setting.addToggle("autoname", {
+	label : "Autoname saves",
+	default  : true,
+}); 
+// end name saves toggle
+
+// enable/disable notifications toggle
+Setting.addToggle("notifications", {
+	label : "Enable notifications",
+	default : true,
+});
+// end enable/disable notifications
+
+// enable/disable dialog tags toggle
+var settingDialogTags = function () {
+	if (settings.dialogtags) {
+		State.variables.choice_labels = true;
+		State.variables.flirt_label = '— &#9825;';
+		State.variables.info_label = '— &#8634;';
+		$(document).trigger(":liveupdate");
+	}
+	else {
+		State.variables.choice_labels = false;
+		State.variables.flirt_label = '';
+		State.variables.info_label = '';
+		$(document).trigger(":liveupdate");
+	}
+};
+Setting.addToggle("dialogtags", {
+	label: "Enable dialog tags",
+	default: true,
+	desc	: "(♡ - flirt | ↺ - info loop)",
+	onInit   : settingDialogTags,
+	onChange : settingDialogTags
+});
+// end dialog tags
+
+//MACROS//
+// notify.min.js, for SugarCube 2, by Chapel
+// v1.1.1, 2021-01-22, 404cc7678295ca61a8b0b8bc3fa5d54dba6ac858
+;!function(){var s=/\d+m?s$/;function e(s,e,t){"string"==typeof s&&("number"!=typeof e&&(e=!1),$(document).trigger({type:":notify",message:s,delay:e,class:t||""}))}$(document.body).append("<div id='notify'></div>"),$(document).on(":notify",(function(s){s.message&&"string"==typeof s.message&&(s.message.trim(),s.class?"string"==typeof s.class?s.class="open macro-notify "+s.class:Array.isArray(s.class)?s.class="open macro-notify "+s.class.join(" "):s.class="open macro-notify":s.class="open macro-notify",s.delay?("number"!=typeof s.delay&&(s.delay=Number(s.delay)),Number.isNaN(s.delay)&&(s.delay=2e3)):s.delay=2e3,$("#notify").empty().wiki(s.message).addClass(s.class),setTimeout((function(){$("#notify").removeClass()}),s.delay))})),Macro.add("notify",{tags:null,handler:function(){var t=this.payload[0].contents,a=!1,n=!1;if(this.args.length>0){var i=s.test(this.args[0]);"number"==typeof this.args[0]||i?(a=i?Util.fromCssTime(this.args[0]):this.args[0],n=this.args.length>1&&this.args.slice(1).flatten()):n=this.args.flatten().join(" ")}e(t,a,n)}}),setup.notify=e}();
+// end notify.min.js
+
+// live update js by Cycy
+(function () {
+	"use strict";
+	$(document).on(":liveupdate", function () {
+		$(".macro-live").trigger(":liveupdateinternal");
+	});
+	Macro.add(['update', 'upd'], {
+		handler: function handler() {
+			$(document).trigger(":liveupdate");
+		}
+	});
+	Macro.add(['live', 'l', 'lh'], {
+		skipArgs: true,
+		handler: function handler() {
+			if (this.args.full.length === 0) {
+				return this.error('no expression specified');
+			}
+			try {
+				var statement = this.args.full;
+				var result = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+				if (result !== null) {
+					var lh = this.name === "lh";
+					var $el = $("<span></span>").addClass("macro-live").wiki(lh ? Util.escape(result) : result).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						var out = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+						$el.empty().wiki(lh ? Util.escape(out) : out);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+	Macro.add(['liveblock', 'lb'], {
+		tags: null,
+		handler: function handler() {
+			try {
+				var content = this.payload[0].contents.trim();
+				if (content) {
+					var $el = $("<span></span>").addClass("macro-live macro-live-block").wiki(content).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						$el.empty().wiki(content);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+})();
+// end live update js
+
+:: StoryStylesheet [stylesheet]
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab&family=Cutive&display=swap');
+
+@font-face {
+  font-family: "Open Dyslexic";
+  src: url("https://dl.dropbox.com/s/z61rc6kecqzn2pm/OpenDyslexic-Regular.woff2")format("woff2"),
+	url("https://dl.dropbox.com/s/7utsi12557865ty/OpenDyslexic-Regular.woff")format("woff"),
+    url("https://dl.dropbox.com/s/1q7eh2yte04g3z5/OpenDyslexic-Regular.otf")format("otf");
+}
+
+/*put your theme colors & fonts here so that you don't have to type the codes over and over again!*/
+:root {
+  /*light mode (default)*/
+  --bg: #e8e8e8; /* Outer Background Colour */
+  --bg2: #f4f4f2; /* Passage BG Colour  */
+  --menu: #ab9eae; /* Top & Bottom Highlight Colour */
+  --text: #222;
+  --accent: #e8e8e8;
+  /*dark mode*/
+  --dm-bg: #212224;
+  --dm-bg2: #2c2c2c;
+  --dm-menu: #524156;
+  --dm-text: #efefef;
+  --dm-accent: #212224;
+  /*fonts*/
+  --special: "Cutive", serif;
+  --serif: "Josefin Slab", serif;
+  --sansserif: "Montserrat", sans-serif;
+  --opendyslexic: "Open Dyslexic", sans-serif;
+}
+
+/*basics*/
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  width: 90vw;
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.dm body {
+  background-color: var(--dm-bg);
+  color: var(--dm-text);
+}
+#ui-bar {
+  display: none;
+}
+#story {
+  background-color: var(--bg);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: .9em;
+  margin: 0 auto;
+}
+.dm #story {
+  background-color: var(--dm-bg);
+}
+.serif .passage {
+  font-family: var(--serif);
+}
+.sansserif .passage {
+  font-family: var(--sansserif);
+}
+.opendyslexic .passage {
+  font-family: var(--opendyslexic);
+}
+.passage {
+  line-height: 200%;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+}
+#passages {
+  background-color: var(--bg2);
+  max-height: 70%;
+  width: 90%;
+  max-width: 80ch;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border: 1.8em solid var(--bg2);
+  margin: 50px auto;
+  padding: 0 1.2em .5em 2em;
+}
+.dm #passages {
+  background-color: var(--dm-bg2);
+  border: 2em solid var(--dm-bg2);
+}
+#story hr {
+  border: none;
+  height: 2px;
+  margin-bottom: 1.5em;
+}
+#story hr::before {
+  background-color: var(--menu);
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+}
+.dm #story hr::before {
+  background-color: var(--dm-menu);
+}
+
+/*scrollbar*/
+#passages::-webkit-scrollbar {
+  width: 3px;
+}
+#passages::-webkit-scrollbar-track {
+  background-color: var(--menu);
+  border: 1px solid var(--bg2);
+}
+.dm #passages::-webkit-scrollbar-track {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-bg2);
+}
+#passages::-webkit-scrollbar-thumb {
+  background-color: var(--menu);
+}
+.dm #passages::-webkit-scrollbar-thumb {
+  background-color: var(--dm-menu);
+}
+
+/*headings*/
+#story h1 {
+  font-family: var(--special);
+  margin: .2em;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+#story h2 {
+  color: var(--menu);
+  margin: .2em;
+  text-transform: uppercase;
+}
+.dm #story h2 {
+  color: var(--dm-menu);
+}
+#story h3 {
+  margin: .2em;
+  text-transform: lowercase;
+  letter-spacing: .2em;
+}
+
+/*links*/
+a {
+  color: var(--text);
+  text-decoration: none !important;
+}
+.dm a {
+  color: var(--dm-text);
+}
+a:hover {
+  color: var(--menu);
+}
+.dm a:hover {
+  color: var(--dm-menu);
+}
+.passage a {
+  font-weight: bold;
+}
+.passage a:hover {
+  color: var(--text);
+  font-style: italic;
+}
+.dm .passage a:hover {
+  color: var(--dm-text);
+}
+.header a:hover {
+  color: var(--accent) !important;
+  transition: .5s;
+}
+.dm .header a:hover {
+  color: var(--dm-accent) !important;
+}
+
+/*cycling*/
+#story .macro-cycle {
+  font-weight: bold;
+}
+#story .macro-cycle:hover {
+  font-style: italic;
+}
+#story .macro-cycle::after {
+  color: var(--menu);
+  content: "↴";
+  padding-left: .2em;
+}
+.dm #story .macro-cycle::after {
+  color: var(--dm-menu);
+}
+
+/*buttons*/
+.passage button {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .05em;
+  padding: .5em;
+}
+.dm .passage button {
+  color: var(--dm-text);
+  border: 1px solid var(--dm-text);
+}
+.passage button:hover {
+  box-shadow: 4px 4px 0 var(--menu);
+}
+.dm .passage button:hover {
+  box-shadow: 4px 4px 0 var(--dm-menu);
+}
+.next button {
+  display: flex;
+  margin: 0 auto;
+  transform: translateX(-10%);
+}
+
+/*textbox*/
+#story .macro-textbox {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+  letter-spacing: .05em;
+  padding: .5em;
+  margin-right: .5em;
+}
+.dm #story .macro-textbox {
+  color: var(--dm-text);
+  border: 1px solid var(--dm-text);
+}
+#story .macro-textbox:focus {
+  box-shadow: 4px 4px 0 var(--menu);
+}
+.dm #story .macro-textbox:focus {
+  box-shadow: 4px 4px 0 var(--dm-menu);
+}
+
+/*lists*/
+#story ul {
+  list-style: none;
+  padding-left: 2em;
+  margin: auto;
+  text-align: left;
+}
+#story ul li{
+  cursor: pointer;
+  letter-spacing: 0.1em;
+}
+#story ul li::before {
+  content: '|';
+  margin-right: .5em;
+  margin-left: -1em;
+}
+#story ul li:hover {
+  color: var(--menu);
+  font-weight: bold;
+}
+.dm #story ul li:hover {
+  color: var(--dm-menu);
+}
+
+/*header*/
+.header {
+  background-color: var(--menu);
+  height: 10%;
+  width: 100%;
+  transition: 0.75s;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.dm .header {
+  background-color: var(--dm-menu);
+}
+.header:hover {
+  height: 14%;
+}
+#header-text {
+  text-align: center;
+  margin: 0 auto;
+}
+.title {
+  color: var(--text);
+  font-family: var(--special);
+  font-size: 20pt;
+}
+.dm .title {
+  color: var(--dm-text);
+}
+.author {
+  font-family: var(--sansserif);
+  letter-spacing: .1em;
+  font-size: .7vw;
+}
+.author a:hover {
+  font-weight: bold;
+}
+
+/*function menu*/
+#function-menu {
+  display: flex;
+  position: fixed;
+  left: 2%;
+}
+#function-menu span {
+  color: transparent;
+  position: relative;
+  padding: 20px;
+  transition: 0.3s;
+  font-size: 1.5vw;
+}
+#menu {
+  color: var(--text) !important;
+}
+.dm #menu {
+  color: var(--dm-text);
+}
+.header:hover #function-menu span {
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.75s;
+}
+.dm .header:hover #function-menu span {
+  color: var(--dm-text);
+}
+.header:hover #settings:hover {
+  color: var(--accent);
+  transition: 0.5s;
+}
+.dm .header:hover #settings:hover {
+  color: var(--dm-accent);
+}
+.header:hover #saves:hover {
+  color: var(--accent);
+  transition: 0.5s;
+}
+.dm .header:hover #saves:hover {
+  color: var(--dm-accent);
+}
+.header:hover #restart:hover {
+  color: var(--accent);
+  transition: 0.5s;
+}
+.dm .header:hover #restart:hover {
+  color: var(--dm-accent);
+}
+.mobile-menu {
+  display: none;
+}
+
+/*back button*/
+#back {
+  color: var(--menu);
+  position: fixed;
+  left: 15%;
+  font-size: 1.5vw;
+}
+.dm #back {
+  color: var(--dm-text);
+}
+#back:hover {
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.75s;
+}
+.dm #back:hover {
+  color: var(--dm-menu);
+}
+
+/*up button*/
+#up {
+  color: var(--text);
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5vw;
+}
+.dm #up {
+  color: var(--dm-text);
+}
+.footer:hover #up {
+  color: var(--menu);
+  bottom: 75%;
+}
+.dm .footer:hover #up {
+  color: var(--dm-menu);
+}
+
+/*footer*/
+.footer {
+  background-color: var(--menu);
+  height: 10%;
+  width: 100%;
+  transition: 0.75s;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.dm .footer {
+  background-color: var(--dm-menu);
+}
+.footer:hover {
+  height: 14%;
+}
+
+/*footer menu*/
+#footer-menu {
+  font-family: var(--special);
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+#footer-menu a {
+  color: transparent;
+  transition: 0.75s;
+  font-size: 2vw;
+}
+.footer:hover #footer-menu a {
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.75s;
+}
+.dm .footer:hover #footer-menu a {
+  color: var(--dm-text);
+}
+#footer-menu li {
+  list-style: none;
+  padding: 5%;
+}
+#footer-menu a:hover {
+  letter-spacing: .1em;
+}
+
+/*dialog boxes*/
+#ui-overlay {
+  background-color: var(--bg);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.dm #ui-overlay {
+  background-color: var(--dm-bg);
+}
+#ui-dialog {
+  background-color: var(--menu);
+  height: auto;
+  max-width: 60vw;
+  padding: .5em;
+}
+.dm #ui-dialog {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-menu);
+}
+#ui-dialog-titlebar {
+  background-color: var(--menu);
+  position: relative;
+  padding: 2em;
+}
+.dm #ui-dialog-titlebar {
+  background-color: var(--dm-menu);
+}
+#ui-dialog-title {
+  font-family: var(--special);
+  font-size: 2em;
+  font-weight: normal;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+}
+#ui-dialog-close {
+  background-color: transparent;
+  color: var(--text);
+  height: auto;
+  width: auto;
+  border: none;
+  font-size: 2em;
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+.dm #ui-dialog-close {
+  color: var(--dm-text);
+}
+#ui-dialog-close:hover {
+  background-color: transparent;
+  color: var(--accent);
+}
+.dm #ui-dialog-close:hover {
+  color: var(--dm-accent);
+}
+#ui-dialog-body {
+  background-color: var(--bg2);
+  border: none;
+  color: var(--text);
+  height: auto;
+  width: 100%;
+  font-family: var(--sansserif);
+  font-size: 90%;
+}
+.dm #ui-dialog-body {
+  background-color: var(--dm-bg2);
+  color: var(--dm-text);
+}
+#ui-dialog-body button {
+  background-color: var(--menu);
+  border: 1px solid var(--text);
+  color: var(--text);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#ui-dialog-body button::before {
+  content: "" !important;
+}
+.dm #ui-dialog-body button {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+#ui-dialog-body button:hover {
+  box-shadow: 4px 4px 0 var(--text);
+}
+.dm #ui-dialog-body button:hover {
+  box-shadow: 4px 4px 0 var(--dm-text);
+}
+
+/*setting dropdowns*/
+#setting-control-theme, #setting-control-fontsize, #setting-control-fontfamily {
+  background-color: var(--bg);
+  border: 1px solid var(--text);
+  color: var(--text);
+}
+.dm #setting-control-theme, .dm #setting-control-fontsize, .dm #setting-control-fontfamily {
+  background-color: var(--dm-bg);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+#setting-control-theme:hover, #setting-control-fontsize:hover, #setting-control-fontfamily:hover {
+  background-color: var(--menu);
+  border: 1px solid var(--text);
+  color: var(--text);
+}
+.dm #setting-control-theme:hover, .dm #setting-control-fontsize:hover, .dm #setting-control-fontfamily:hover {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+
+/*setting toggle buttons*/
+#ui-dialog-body.settings button[id|=setting-control] {
+  background-color: var(--bg);
+  border: 1px solid var(--text);
+  color: var(--text);
+  text-transform: none;
+  font-weight: normal;
+}
+.dm #ui-dialog-body.settings button[id|=setting-control] {
+  background-color: var(--dm-bg);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+#ui-dialog-body button[id|="setting-control"]:hover {
+  background-color: var(--bg) !important;
+  border: 1px solid var(--text) !important;
+  box-shadow: none;
+}
+.dm #ui-dialog-body button[id|="setting-control"]:hover {
+  background-color: var(--dm-bg) !important;
+  border: 1px solid var(--dm-text) !important;
+}
+#ui-dialog-body button[id|="setting-control"].enabled {
+  background-color: var(--menu) !important;
+  border: 1px solid var(--text) !important;
+}
+.dm #ui-dialog-body button[id|="setting-control"].enabled {
+  background-color: var(--dm-menu) !important;
+  border: 1px solid var(--dm-text) !important;
+}
+
+/*stat bars*/
+.stat-bar-group {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1em 3em 3em;
+  border: 1px solid var(--menu);
+}
+.dm .stat-bar-group {
+  border: 1px solid var(--dm-menu);
+}
+.stat-bar-container {
+  background-color: var(--accent);
+  color: var(--text);
+  position: relative;
+  height: 3vh;
+  width: 100%;
+  padding: 1em 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .05em;
+}
+.dm .stat-bar-container {
+  background-color: var(--dm-accent);
+  color: var(--dm-text);
+}
+.stat-bar {
+  background-color: var(--menu);
+  max-width: 100%;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.dm .stat-bar {
+  background-color: var(--dm-menu);
+}
+.stat-bar-overlay-right {
+  position: absolute;
+  right: .5em;
+  bottom: 20%;
+  z-index: 3;
+}
+.stat-bar-overlay-left {
+  position: absolute;
+  left: .5em;
+  bottom: 20%;
+  z-index: 3;
+}
+
+/*notifications*/
+#notify {
+  background-color: var(--bg2);
+  color: var(--text);
+  display: block;
+  width: 15em;
+  font-family: var(--sansserif);
+  text-align: left;
+  text-transform: lowercase;
+  letter-spacing: .05em;
+  padding : .5em;
+  -webkit-transition: right 1s;
+  -moz-transition: right 1s;
+  -o-transition: right 1s;
+  transition: right 1s;
+  position: fixed;
+  right: -20em;
+  top: 13%;
+}
+.dm #notify {
+  background-color: var(--dm-bg2);
+  color: var(--dm-text);
+}
+#notify.open {
+  right: 0;
+}
+
+/*tablet*/
+@media screen and (max-width: 1024px) {
+  .header {
+	height: 60px;
+  }
+  .header:hover {
+	height: 100px;
+  }
+  .title {
+	font-size: 2em;
+  }
+  .author {
+	font-size: .7em;
+  }
+  #function-menu {
+	display: block;
+  }
+  #function-menu span {
+	font-size: 3vw;
+	padding: .5em;
+  }
+  #back {
+	font-size: 3vw;
+  }
+  #up {
+	font-size: 3vw;
+  }
+  .footer {
+	height: 60px;
+  }
+  .footer:hover {
+	height: 100px;
+  }
+  #footer-menu {
+	padding-top: 10em;
+	transition: 1s;
+  }
+  #footer-menu a {
+	font-size: 4vw;
+  }
+  .footer:hover #footer-menu {
+	padding-top: 0;
+	transition: 1s;
+  }
+  #notify {
+	top: 12%;
+  }
+}
+@media screen and (max-width: 800px) {
+  #passages {
+	max-height: 70%;
+  }
+  #back {
+	left: 16%;
+  }
+  #up {
+	bottom: 50%;
+  }
+  #footer-menu li {
+	padding: 5%;
+  }
+  .stat-bar-group {
+	padding: .5em 2em 2.5em;
+  }
+  .stat-bar-container {
+	padding: .5em 0;
+  }
+  #notify {
+	top: 9%;
+  }
+}
+@media screen and (max-width: 600px) {
+  #story {
+	font-size: 80%
+  }
+   #story ul {
+	padding-left: .5em;
+  }
+  #passages {
+	max-height: 70%;
+	border: 2.5em solid var(--bg2);
+  }
+  .dm #passages {
+	border: 2.5em solid var(--dm-bg2);
+  }
+  .stat-bar-group {
+	padding: 0 1em 2em;
+  }
+  .stat-bar-container {
+	padding: 1em 0;
+	font-size: 80%;
+  }
+  #notify {
+	top: 9.5%;
+  }
+}
+  
+/*mobile portrait*/
+@media screen and (max-width: 420px) {
+  body {
+	background-color: var(--bg2);
+  }
+  .dm body {
+	background-color: var(--dm-bg2);
+  }
+  #story {
+	background-color: var(--bg2);
+	font-size: 70%;
+  }
+  .dm #story {
+	background-color: var(--dm-bg2);
+	font-size: 70%;
+  }
+  #passages {
+	max-height: 70%;
+	width: 100%;
+	border: none;
+	padding: 1.5em;
+  }
+  .dm #passages {
+	border: none;
+  }
+  #passages::-webkit-scrollbar {
+	width: 2px;
+  }
+  #passages::-webkit-scrollbar-track {
+	border: .5px solid var(--bg2);
+  }
+  .dm #passages::-webkit-scrollbar-track {
+	border: .5px solid var(--dm-bg2);
+  }
+  .header {
+	height: 40px;
+  }
+  .header:hover {
+	height: 15vh;
+  }
+  .title {
+	font-size: 1.5em;
+	transition: .75s;
+  }
+  .author {
+	display: none;
+	transition: .75s;
+  }
+  .dm .author {
+	color: transparent;
+  }
+  .author a {
+	color: transparent;
+  }
+  .dm .author a {
+	color: transparent;
+  }
+  .header:hover .title {
+	font-size: 4vh;
+  }
+  .header:hover .author {
+	display: block;
+	color: var(--text);
+	transition: .75s;
+  }
+  .dm .header:hover .author {
+	color: var(--dm-text);
+  }
+  .header:hover .author a {
+	color: var(--text);
+  }
+  .dm .header:hover .author a {
+	color: var(--dm-text);
+  }
+  #function-menu {
+	display: none;
+  }
+  #footer-menu {
+	display: none;
+  }
+  #back {
+	left: 2%;
+  }
+  .footer {
+	height: 40px;
+  }
+  .footer:hover {
+	height: 15vh;
+  }
+  #up {
+	display: none;
+  }
+  #notify {
+	background-color: var(--menu);
+	width: 12em;
+	font-size: 70%;
+	font-weight: bold;
+  }
+  .dm #notify {
+	background-color: var(--dm-menu);
+  }
+  /*mobile dialog boxes*/
+  #ui-overlay {
+	background-color: var(--menu);
+	opacity: 1 !important;
+  }
+  .dm #ui-overlay {
+	background-color: var(--dm-menu);
+  }
+  #ui-dialog {
+	min-width: 100vw;
+	position: absolute;
+	top: 2em !important;
+	left: 0 !important;
+	padding: 1px;
+  }
+  #ui-dialog-close {
+	font-size: 1.2em;
+	top: -10%;
+	right: 10%;
+  }
+   #ui-dialog-body {
+	background-color: var(--menu);
+	font-size: 80%;
+	padding: 30px;
+  }
+  .dm #ui-dialog-body {
+	background-color: var(--dm-menu);
+  }
+  #ui-dialog-body.saves {
+	font-size: 60%;
+	padding: 10px;
+  }
+  #ui-dialog-body button {
+	background-color: var(--bg2);
+  }
+  .dm #ui-dialog-body button {
+	background-color: var(--dm-bg2);
+  }
+  /*mobile menu*/
+  .mobile-menu {
+	height: 100px;
+	width: 100%;
+	display: block;
+	position: fixed;
+	left: 0;
+	bottom: -70px;
+  }
+  .footer:hover .mobile-menu {
+	height: 13vh;
+	bottom: 0;
+  }
+  #mob-menu {
+	transition: .75s;
+	position: absolute;
+  	left: 50%;
+  	transform: translateX(-50%);
+  }
+  .footer:hover #mob-menu {
+	color: transparent;
+	transition: 0s;
+  }
+  #mob-function-menu {
+	margin: 2.2vh auto 1vh;
+	color: transparent;
+	text-align: center;
+	font-size: 2.5vh;
+	padding-top: 20em;
+	transition: 1s;
+  }
+  .footer:hover #mob-function-menu {
+	color: var(--text);
+	padding-top: 0;
+	transition: 1s;
+  }
+  .dm .footer:hover #mob-function-menu {
+	color: var(--dm-text);
+  }
+  #mob-function-menu span {
+	padding: 5px;
+  }
+  #mob-footer-menu {
+	display: none;
+	transition: 1s;
+  }
+  #mob-footer-menu li {
+	font-family: var(--special);
+	font-size: 3vh;
+	padding: .2vh 1vh;
+  }
+  .footer:hover #mob-footer-menu {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	transition: 1s;
+  }
+ .footer:hover #mob-footer-menu a {
+   color: var(--text);
+  }
+  .dm .footer:hover #mob-footer-menu a {
+	color: var(--dm-text);
+  }
+}
+/*mobile landscape*/
+@media screen and (max-height: 500px) {
+  .passage {
+	font-size: 80%;
+  }
+  #story ul {
+	padding-left: 1em;
+  }
+  #ui-dialog-titlebar {
+	padding: 1em;
+  }
+  #ui-dialog-close {
+	top: 0;
+  }
+  #ui-dialog-body {
+	max-height: 65vh;
+	font-size: 80%;
+  }
+  #ui-dialog-body::-webkit-scrollbar-track {
+	background-color: var(--menu);
+	border: 1px solid var(--bg2);
+  }
+  .dm #ui-dialog-body::-webkit-scrollbar-track {
+	background-color: var(--dm-menu);
+	border: 1px solid var(--dm-bg2);
+  }
+  #ui-dialog-body::-webkit-scrollbar-thumb {
+	background-color: var(--menu);
+  }
+  .dm #ui-dialog-body::-webkit-scrollbar-thumb {
+	background-color: var(--dm-menu);
+  }
+  #ui-dialog-body.saves {
+	padding: 1em;
+  }
+  #footer-menu {
+    padding-top: 4em;
+  }
+  #notify {
+	width: 12em;
+	font-size: 70%;
+	font-weight: bold;
+	top: 5vh;
+  }
+}
