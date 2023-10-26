@@ -19,11 +19,6 @@ System Passages
 :: StoryInit 
 	some init stuff here...
 :: StoryBanner {"position":"150,225","size":"200,100"}
-	<<set $health = 5>>
-	<<set $money = 10>>
-
-	HEALTH: $health
-	MONEY: $money
 :: StoryInterface {"position":"150,325","size":"200,100"}
 	<div class="header">
 		<div id="header-text" data-passage="header-text"></div>
@@ -90,7 +85,7 @@ System Passages
 
 
 :: header-text {"position":"150,125","size":"200,100"}
-	<span class="title">CP sim </span>
+	<span class="title">Creative Project Simulator</span>
 	<span class="author">by <a href="https://ahmedamer.co.uk" target="_blank">ahmed amer</a></span>
 
 
@@ -1465,15 +1460,16 @@ Scripts - JS/CSS
 /*
 Main Passages 
 */
-:: Aside:Making Interactive Novel {"position":"1575,400","size":"100,100"}
+:: Aside:Making Interactive Novel {"position":"1400,400"}
 	Well you can't do that one, that's my thing. And <i>this</i> is my creative project so I'm not letting you simulate that.
+	And another thing... 
+	
 
 
-:: ExtraPassage {"position":"1025,575","size":"100,100"}
-	Hello, this is my extra passage!
 
 
-:: GiveUp [rough] {"position":"1700,0","size":"100,100"}
+
+:: GiveUp [rough] {"position":"1400,0"}
 	You consider abandoning your creative project, and with it, your dreams. Your soul gradually withers, joining the millions of others who didn’t quite reach their potential. 
 
 	Also, your lack of commitment to a creative project makes you less attractive to other creatives. The relationship you end up in is barren of life and spontaneity. 
@@ -1486,13 +1482,13 @@ Main Passages
 
 
 
-:: Start - AgreeToHonesty [rough] {"position":"900,200","size":"200,200"}
+:: Start - AgreeToHonesty [rough] {"position":"900,150","size":"200,200"}
 	<<set $hasAgreedToHonesty = false>>
 	<<set $health = 5>>
 	<<set $money = 10>>
 
 
-	[img[setup.Path + "/src/assets/img-cps-title-mountain.png"]]
+	[img[setup.Path + "src/assets/img-cps-title-mountain.png"]]
 
 	A warning - you must be honest to participate in this game. You could just pick all the best options, but that will get you nowhere. 
 
@@ -1504,12 +1500,15 @@ Main Passages
 	<<superMacro>>
 
 
-:: Start-InputUserDetails [idea] {"position":"1950,200","size":"100,100"}
+
+
+:: Start-InputUserDetails [idea] {"position":"1700,200"}
 	<<type 50ms>>
 	...Asking the player for some kind of details! 
 	<</type>>
 
 	Perhaps their name, age, main inspirations... etc.
+
 
 
 	:: Start-LongT&Cs {"position":"1275,500","size":"100,100"}
@@ -1524,7 +1523,8 @@ Main Passages
 	Perhaps like, 3 or 4 in increasingly absurd lengths?
 
 
-:: Start-PickProjectType {"position":"1525,200","size":"200,100"}
+
+:: Start-PickProjectType {"position":"1350,200","size":"200,100"}
 	You'd like to do something creative. That's nice. It's nice to have dreams. Perhaps one day you will be. What type of project is it? 
 
 	[[An album ->Start-InputUserDetails][$projectType to 'album']]
@@ -1535,8 +1535,8 @@ Main Passages
 	[[I'm bored of this (Quit Game)->GiveUp]]
 
 
-:: Start-YourDetails [idea] {"position":"175,475","size":"100,100"}
 
+:: Start-YourDetails [idea] {"position":"175,475","size":"100,100"}
 
 	<<type 50ms>>
 	...Asking the player for: 

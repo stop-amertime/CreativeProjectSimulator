@@ -1420,13 +1420,9 @@ img {
 			}
 		});
 	})();
-	// end live update js</script><tw-tag name="idea" color="purple"></tw-tag><tw-tag name="rough" color="red"></tw-tag><tw-passagedata pid="1" name="ExtraPassage" tags="" position="1025,575" size="100,100">Hello, this is my extra passage!</tw-passagedata><tw-passagedata pid="2" name="--------------" tags="" position="225,100" size="100,100">/* 
+	// end live update js</script><tw-tag name="rough" color="red"></tw-tag><tw-tag name="idea" color="purple"></tw-tag><tw-passagedata pid="1" name="ExtraPassage" tags="" position="100,100" size="100,100">Hello, this is my extra passage!</tw-passagedata><tw-passagedata pid="2" name="--------------" tags="" position="225,100" size="100,100">/* 
 System Passages 
-*/</tw-passagedata><tw-passagedata pid="3" name="StoryInit" tags="" position="350,100" size="100,100">some init stuff here...</tw-passagedata><tw-passagedata pid="4" name="StoryBanner" tags="" position="150,225" size="200,100">&lt;&lt;set $health = 5&gt;&gt;
-	&lt;&lt;set $money = 10&gt;&gt;
-
-	HEALTH: $health
-	MONEY: $money</tw-passagedata><tw-passagedata pid="5" name="StoryInterface" tags="" position="150,325" size="200,100">&lt;div class=&quot;header&quot;&gt;
+*/</tw-passagedata><tw-passagedata pid="3" name="StoryInit" tags="" position="350,100" size="100,100">some init stuff here...</tw-passagedata><tw-passagedata pid="4" name="StoryBanner" tags="" position="150,225" size="200,100"></tw-passagedata><tw-passagedata pid="5" name="StoryInterface" tags="" position="150,325" size="200,100">&lt;div class=&quot;header&quot;&gt;
 		&lt;div id=&quot;header-text&quot; data-passage=&quot;header-text&quot;&gt;&lt;/div&gt;
 		&lt;div id=&quot;function-menu&quot;&gt;
 			&lt;span id=&quot;menu&quot; class=&quot;lnr lnr-menu&quot;&gt;&lt;/span&gt;
@@ -1478,7 +1474,7 @@ System Passages
 		Dialog.open();
 		&lt;&lt;/script&gt;&gt;
 	&lt;&lt;/link&gt;&gt;
-	&lt;/li&gt;</tw-passagedata><tw-passagedata pid="9" name="header-text" tags="" position="150,125" size="200,100">&lt;span class=&quot;title&quot;&gt;CP sim &lt;/span&gt;
+	&lt;/li&gt;</tw-passagedata><tw-passagedata pid="9" name="header-text" tags="" position="150,125" size="200,100">&lt;span class=&quot;title&quot;&gt;Creative Project Simulator&lt;/span&gt;
 	&lt;span class=&quot;author&quot;&gt;by &lt;a href=&quot;https://ahmedamer.co.uk&quot; target=&quot;_blank&quot;&gt;ahmed amer&lt;/a&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="10" name="stats" tags="" position="250,600" size="100,100">&lt;&lt;set $statone to 50&gt;&gt;&lt;&lt;set $stattwo to 50&gt;&gt;\
 	!Stats
 
@@ -1522,19 +1518,20 @@ System Passages
 Scripts - JS/CSS
 */</tw-passagedata><tw-passagedata pid="11" name="Widgets" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;hello&quot;&gt;&gt;
 		Hello world. 
-	&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Aside:Making Interactive Novel" tags="" position="1575,400" size="100,100">Well you can&#39;t do that one, that&#39;s my thing. And &lt;i&gt;this&lt;/i&gt; is my creative project so I&#39;m not letting you simulate that.</tw-passagedata><tw-passagedata pid="13" name="GiveUp" tags="rough" position="1700,0" size="100,100">You consider abandoning your creative project, and with it, your dreams. Your soul gradually withers, joining the millions of others who didn’t quite reach their potential. 
+	&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Aside:Making Interactive Novel" tags="" position="1400,400" size="100,100">Well you can&#39;t do that one, that&#39;s my thing. And &lt;i&gt;this&lt;/i&gt; is my creative project so I&#39;m not letting you simulate that.
+	And another thing...</tw-passagedata><tw-passagedata pid="13" name="GiveUp" tags="rough" position="1400,0" size="100,100">You consider abandoning your creative project, and with it, your dreams. Your soul gradually withers, joining the millions of others who didn’t quite reach their potential. 
 
 	Also, your lack of commitment to a creative project makes you less attractive to other creatives. The relationship you end up in is barren of life and spontaneity. 
 
 	Every day of the rest of your life feels identical, an inescapable Groundhog Day. Your life is fine, it&#39;s not &lt;i&gt;bad&lt;/i&gt;. But, you live the rest of your life with a feeling that there&#39;s a lock deep inside you, that you never quite found the key for. 
 
 	&lt;&lt;return &quot;Wait - no! I won&#39;t give up!&quot;&gt;&gt;
-	Give up.</tw-passagedata><tw-passagedata pid="14" name="Start - AgreeToHonesty" tags="rough" position="900,200" size="200,200">&lt;&lt;set $hasAgreedToHonesty = false&gt;&gt;
+	Give up.</tw-passagedata><tw-passagedata pid="14" name="Start - AgreeToHonesty" tags="rough" position="900,150" size="200,200">&lt;&lt;set $hasAgreedToHonesty = false&gt;&gt;
 	&lt;&lt;set $health = 5&gt;&gt;
 	&lt;&lt;set $money = 10&gt;&gt;
 
 
-	[img[setup.Path + &quot;/src/assets/img-cps-title-mountain.png&quot;]]
+	[img[setup.Path + &quot;src/assets/img-cps-title-mountain.png&quot;]]
 
 	A warning - you must be honest to participate in this game. You could just pick all the best options, but that will get you nowhere. 
 
@@ -1543,11 +1540,12 @@ Scripts - JS/CSS
 	&lt;&lt;button [[I agree-&gt;Start-PickProjectType]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 	&lt;&lt;hello&gt;&gt;
-	&lt;&lt;superMacro&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Start-InputUserDetails" tags="idea" position="1950,200" size="100,100">&lt;&lt;type 50ms&gt;&gt;
+	&lt;&lt;superMacro&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Start-InputUserDetails" tags="idea" position="1700,200" size="100,100">&lt;&lt;type 50ms&gt;&gt;
 	...Asking the player for some kind of details! 
 	&lt;&lt;/type&gt;&gt;
 
 	Perhaps their name, age, main inspirations... etc.
+
 
 
 	:: Start-LongT&amp;Cs {&quot;position&quot;:&quot;1275,500&quot;,&quot;size&quot;:&quot;100,100&quot;}
@@ -1559,7 +1557,7 @@ Scripts - JS/CSS
 
 	etc.)
 
-	Perhaps like, 3 or 4 in increasingly absurd lengths?</tw-passagedata><tw-passagedata pid="16" name="Start-PickProjectType" tags="" position="1525,200" size="200,100">You&#39;d like to do something creative. That&#39;s nice. It&#39;s nice to have dreams. Perhaps one day you will be. What type of project is it? 
+	Perhaps like, 3 or 4 in increasingly absurd lengths?</tw-passagedata><tw-passagedata pid="16" name="Start-PickProjectType" tags="" position="1350,200" size="200,100">You&#39;d like to do something creative. That&#39;s nice. It&#39;s nice to have dreams. Perhaps one day you will be. What type of project is it? 
 
 	[[An album -&gt;Start-InputUserDetails][$projectType to &#39;album&#39;]]
 	[[A poem -&gt;Start-InputUserDetails][$projectType to &#39;poem&#39;]]
