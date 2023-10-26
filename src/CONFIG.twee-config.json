@@ -1,0 +1,17 @@
+{
+    "sugarcube-2": {
+        "macros": {
+            "superMacro": {
+                "name": "superMacro",
+                "description": "says hello"
+            },
+            "anotherOne": {},
+
+            "hello": {
+            }
+        },
+        "widgets": {
+            "hello": {}
+        }
+    }
+}
